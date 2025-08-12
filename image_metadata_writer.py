@@ -1,6 +1,6 @@
-import Image
-import piexif
 import os
+
+import piexif
 from PIL import Image
 
 
@@ -12,7 +12,8 @@ class ImageMetadataWriter:
     def write_metadata(self, image_path: str, title: str, description: str, keywords: str, output_path: str):
         image = Image.open(image_path)
         exif_bytes = image.info.get("exif")
-        exif_dict = piexif.load(exif_bytes) if exif_bytes else {"0th": {}, "Exif": {}, "GPS": {}, "1st": {}, "thumbnail": None}
+        exif_dict = piexif.load(exif_bytes) if exif_bytes else {"0th": {}, "Exif": {}, "GPS": {}, "1st": {},
+                                                                "thumbnail": None}
 
         exif_dict["0th"][piexif.ImageIFD.ImageDescription] = description.encode("utf-8")
         exif_dict["0th"][piexif.ImageIFD.XPTitle] = self.to_utf16le_bytes(title)

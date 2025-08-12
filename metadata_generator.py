@@ -18,9 +18,11 @@ class MetadataGenerator:
                         {
                             "type": "input_image",
                             "image_url": f"data:image/jpeg;base64,{base64_image}",
+                            "detail": "low"
                         },
                     ],
                 }
             ],
         )
-        return json.loads(response.output_text)
+        text = json.loads(response.output_text)
+        return text
